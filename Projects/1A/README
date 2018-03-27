@@ -1,0 +1,13 @@
+NAME: Jonathan Chu
+EMAIL: jonathanchu78@gmail.com
+ID: 004832220
+
+lab1a.c: the C source code that performs Character-at-a-time, full duplex 
+terminal I/O supporting a --shell argument that runs shell commands from
+input
+
+Makefile: includes 3 targets:
+default - compiles lab1a.c to lab1a executable with -Wall, -Wextra, and -g
+clean - removes created files, returns directory to state before running
+	program
+dist - creates tarball containing lab1a.c, this README, and Makefile

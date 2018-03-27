@@ -1,0 +1,75 @@
+NAME: Jonathan Chu
+EMAIL: jonathanchu78@gmail.com
+ID: 004832220
+
+lab0.c: C source code that copies input to output, from stdin to stdout
+by default but from files if specified with --input and --output. --segfault
+causes a segmentation fault before copying input to output. --catch registers
+a SIGSEV handler to catch the segmentation fault.
+
+Makefile: "default" target builds lab0 executable from lab0.c. "check" target
+runs a smoke-test including several base test cases on lab0. "clean" target
+removes all files created by the Makefile including the tarball. "dist" 
+target builds the tarball containing lab0.c Makefile, the two screenshots
+backtrace.png and breakpoint.png, and this README
+
+backtrace.png: a screenshot of a gdb session after a segmentation fault caused
+by the --segfault argument to lab0 and its subsequent backtrace
+
+breakpoint.png: a screenshot of a gdb session before a segmentation fault, 
+printing the value of a pointer to show that it is NULL.
+
+
+
+Smoke tests:
+I will include at least one test that covers each exit code, since each of the
+5 exit codes covers a different case that the program should handle.
+
+inOutTest: Basic check to test whether copy works by checking differences
+between input and output files.
+
+baseTest: Test for exit code 0 on a successful copy between files.
+
+stdTest: Test for exit code 0 on a successful copy from stdin to stdout.
+
+argTest: Test for exit code 1 using unrecognized argument.
+
+inFileTest: Test for exit code 2 with invalid input file.
+
+outFileTest: Test for exit code 3 with output file that denies write 
+permissions, modified using chmod -w.
+
+catchTest: Test for exit code 4 with --segfault and --catch parameters.
+
+segFaultTest: Test for exit code 139, the default segmentation fault code
+using --segfault parameter.
+Exit code found here: https://stackoverflow.com/questions/14599670/what-error-code-does-a-process-that-segfaults-return
+
+
+
+
+Obstacles I ran into:
+1. lab0.c
+a. Figuring out getopt from the documentation took a long time since there were
+little errors here and there with the unfamiliar syntax and use of getopt's
+variables for the first time. I even forgot to  include header files, so it 
+wasn't compiling for a minute before I figured that out. 
+b. It took me a while to realize that changing the 0 and 1 file descriptors
+was the way to change the input and output files. At first, I thought I would
+store all the input in some long char array and then copy it all to the target
+at once, rather than byte by byte, but upon realizing there was no way I could
+define a variable to store all that input without giving it a fixed width, byte
+by byte was the way to go.
+c. My terminal was hanging after running ./lab0, and I thought this was because
+I was getting stuck in the getopt while loop. After checking it out in gdb,
+
+2. Makefile
+a. Figuring out how to include smoke test cases took a while; I was getting
+the "unexpected end of file" error before I realized I had to use '\' on line
+endings to write multi-line bash.
+b. I tested my smoke test cases one at a time, but when I was testing one of
+the last ones, suddenly my first case, inOutTest, was failing, which was very
+confusing because how could I fail a case I had already passed if I didn't
+change the code? Turns out it was because in a later case I forgot to rm out.txt,
+so the comparison was failing.
+

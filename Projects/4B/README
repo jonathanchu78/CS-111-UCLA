@@ -1,0 +1,12 @@
+NAME: Jonathan Chu
+EMAIL: jonathanchu78@gmail.com
+ID: 004832220
+
+README: contains descriptions of included files
+
+Makefile: supports default target to build program from source, check target
+to run smoke tests, clean target to remove temporary files, and dist to create
+submission tarball
+
+lab4b.c: C source code for program that reads and outputs temperature, polls
+for commands and executes them, and stops on a button press

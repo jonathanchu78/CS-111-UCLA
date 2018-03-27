@@ -1,0 +1,12 @@
+NAME: Jonathan Chu, Spenser Wong
+EMAIL: jonathanchu78@gmail.com, spenserwong1@gmail.com
+ID: 004832220, 604766156
+
+lab3b.py: python script that reads in csv input and produces output about the
+data as specified
+
+lab3b: shell script that runs lab3b.py with required argument
+
+Makefile: includes default target to build executable, clean target to remove
+temporary files, and dist target to create submission tarball
+

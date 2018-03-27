@@ -1,0 +1,81 @@
+NAME: Jonathan Chu
+EMAIL: jonathanchu78@gmail.com
+ID: 004832220
+
+2.3.1 - Cycles in the basic list implementation:
+For the 1 and 2 thread list tests, there are four different cases to consider:
+1 thread, mutex: for a large list, most of the time goes to list operations because the time it takes 
+	for list operations is greater than the time it takes to get/give up the mutex.
+1 thread, spin lock: most of the time goes to list operations as was the case for one thread mutex for 
+	the same reason.
+2 threads, mutex: most time goes to list operations for large lists since the time for list operations 
+	is greater than that of locking/unlocking
+2 threads, spin lock: about the same amount of CPU time is taken by list operations and by 
+	locking/spinning because while one thread is doing list operations, the other is spinning. The 
+	lock/spin time might be slightly greater than the list operation time because there is some 
+	time when both threads are locking/unlocking.
+
+Locking/spinning and list operations are the most expensive parts of the code because they are run by 
+all threads in the listWork function, the function called in pthread_create. Quick operations like
+getting time and performing arithmetic are not much of a concern since they are overshadowed by more
+expensive operations. 
+
+In high-thread spin lock tests, most of the time is most definitely going to spinning, since only one
+thread can hold a shared resource at a time. Every other thread waiting for that resource is stuck
+spinning, consuming CPU time.
+
+In high-thread mutex tests, most of the time is being spent doing list operations, for large list sizes
+at least. This is because threads that can't obtain the lock sleep and don't waste CPU cycles while the
+thread that does have the lock is performing list operations, consuming many CPU cycles.
+
+
+2.3.2 - Execution Profiling:
+The code consuming the most cycles is the code that grabs the spin lock because this line of code will
+run several times, in a while loop, for all the threads that cannot obtain the lock. It becomes more
+expensive with larger numbers of threads because there will be more contention and more threads spinning
+while waiting for the lock.
+
+
+2.3.3 - Mutex Wait Time:
+The average lock-wait time rises so dramatically with the number of threads because there are more 
+threads waiting to grab the lock and running the mutex operations associated with checking if the
+lock is available.
+
+The completion time per operation rises because there are more threads that need to run list operations
+before the program finishes. 
+
+Completion time rises less dramatically because the time taken for any single thread to undergo list 
+operations is independent of the total number of threads, whereas wait time increases more than linearly
+with the number of threads.
+
+2.3.4 - Performance of Partitioned Lists:
+The greater the number of lists, the more parallelism is possible because threads can access different
+segments of the list concurrently. Thus the performance increases with the number of lists.
+
+The throughput should continue increasing as the number of lists increases up to a certain point.
+Eventually, there will be so many sublists that there is effectively zero contention between threads.
+At this point, further increasing the number of lists would decrease throughput because it causes an
+increased number of lock operations without increasing parallelism.
+
+This does not appear to be the case because an N-way partitioned list spends more time locking than a
+single list with 1/N times as many threads.
+
+Files:
+SortedList.h:The given header file containing declaration of SortedList struct and
+functions
+
+SortedList.c: Contains the implementations of the SortedList functions
+
+lab2_list.c: Source code for protected operations on a shared, segmented doubly linked list with variable
+thread, iteration, and list counts
+
+lab2b_list.csv: Contains data from test runs of lab2_list
+
+lab2_list.gp: The script that generates the .png graphs
+
+lab2b_[1-5].png: Visualizations of data from lab2b_list.csv
+
+profile.out: An execution profiling report of a test case with 1000 iterations, 12 threads, and spin lock
+protection
+
+

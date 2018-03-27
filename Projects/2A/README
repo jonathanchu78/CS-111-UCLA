@@ -1,0 +1,62 @@
+NAME: Jonathan Chu
+EMAIL: jonathanchu78@gmail.com
+ID: 004832220
+
+Question 2.1.1 - causing conflicts:
+The cost of creating a thread is high - it takes a long time to complete an
+instance of thread creation. The cost of running a small number of iterations,
+say for example 10, is very low and the thread will finish the execution of
+these iterations very quickly. Assuming only one thread is being created at a
+time (one created after another), incorrect results will only come when the 
+time it takes a thread to execute its iterations is greater than the time it 
+takes to create one thread because it is in this case that two threads will 
+even have the potential to access the shared variable at the same time.
+
+Smaller numbers of iterations will seldom fail because as mentioned above,
+different threads likely won't run code that accesses the shared variable
+simultaneously.
+
+
+QUESTION 2.1.2 - cost of yielding:
+Yield runs are slower because the running thread gives up the CPU for another
+thread to run. This incurs extra time for context switches and for the other
+thread's execution.
+
+It is not possible to get valid per-operation timings with the --yield option
+because we are allowing context switches and another thread to run, which
+takes unpredictable amounts of time. If we could somehow accurately measure
+the amount of time it takes for this yield to happen, it would be possible to
+get accurate timings.
+
+
+QUESTION 2.1.3 - measurement errors:
+The average cost per operation drops with increasing iterations because the 
+overhead of thread creation becomes less and less significant as compared to
+the time taken to run all the iterations. That is, the time taken to create
+the thread is split up among more iterations when dividing by by # iterations,
+making the average cost per operation lower.
+
+The correct cost per operation could be determined by running a very large 
+number of iterations because as the number of iterations approaches infinity,
+the cost of thread creation becomes insignificant. Another possible approach 
+would be to collect data average cost per operation data for a few different
+#iteration trials and attempt to fit them to the same linear model y = ax + b,
+where y represents total cost, a represents cost per operation, x represents
+#iterations, and b represents cost of thread creation. 
+
+
+QUESTION 2.1.4 - costs of serialization:
+The operations perform similarly for low numbers of threads because there are
+few conflicts in accessing the add function, the critical section. The locks
+only play a role when these conflicts are present.
+
+The protected operations slow down as the number of threads rises because the
+number of conflicts in accessing the critical section rises. This means that
+more often threads will have to wait for other threads to finish executing 
+the critical section code before they may themselves continue execution, 
+causing the program extra overhead.
+
+
+
+
+

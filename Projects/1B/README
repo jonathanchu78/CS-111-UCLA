@@ -1,0 +1,20 @@
+I FAILED 2 SANITY CHECK TESTS AND GOT AN 87 ON THIS ONE. BEWARE.
+
+NAME: Jonathan Chu
+EMAIL: jonathanchu78@gmail.com
+ID: 004832220
+
+lab1b-client.c: Source code for the client side with options
+--port to specify port number, --log to write log output to 
+specified file, and --compress to enable data compression before
+sending over socket.
+
+lab1b-server.c: Source code for the server side which feeds input
+from the client to the shell and sends back output. Options include
+--port to specify port number and --compress to enable data compression 
+before sending over socket.
+
+Makefile: Supports default target which builds the above source files
+to executables, a clean target which removes files temporarily created,
+and a dist target to create the tarball containing the files described 
+here.

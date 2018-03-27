@@ -1,0 +1,12 @@
+NAME: Jonathan Chu
+EMAIL: jonathanchu78@gmail.com
+ID: 004832220
+
+Makefile: supports default target to build program from source, clean target to remove temporary files, and dist to create
+submission tarball
+
+lab4c_tcp.c: C source code for program that reads temperature and sends output 
+through tcp connection
+
+lab4c_tls.c: C source code for program that reads temperature and sends output 
+through tls connection with OpenSSL

@@ -1,0 +1,19 @@
+NAME: Jonathan Chu
+EMAIL: jonathanchu78@gmail.com
+ID: 004832220
+
+S/N: BBGW17080040
+MAC: 2CF7F1066928
+
+my_beaglebone.jpg: a selfie of me and my Beaglebone
+
+connected.png: screenshot showing output of ifconfig command displaying
+addresses
+
+copy.png: screenshot showing successful copy using scp of hello.c, a simple
+hello world source file
+
+build_run.png: screenshot showing successful build and run of hello world
+
+git.png: screenshot showing installation of git and cloning of an empty 
+repository from my GitHub account

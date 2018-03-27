@@ -1,0 +1,11 @@
+WE SOMEHOW SCORED REALLY REALLY BAD ON THIS ONE; PROCEED WITH CAUTION
+
+NAME: Jonathan Chu, Spenser Wong
+EMAIL: jonathanchu78@gmail.com, spenserwong1@gmail.com
+ID: 004832220, 604766156
+
+lab3a.c: c source file that reads file system image and prints out all
+specified data related to its elements
+
+Makefile: includes default target to build executable, clean target to remove
+temporary files, and dist target to create submission tarball
